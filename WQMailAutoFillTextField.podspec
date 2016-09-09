@@ -17,6 +17,4 @@ Pod::Spec.new do |s|
     s.source_files  = 'WQEmailAutoFillTextField/Classes/*.{h,m}'   #源码
     s.requires_arc = true       #是否需要arc
 
-    s.dependency 'Masonry', '~> 1.0.1'
-
 end

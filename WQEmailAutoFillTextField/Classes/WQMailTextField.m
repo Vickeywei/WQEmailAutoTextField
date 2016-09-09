@@ -7,7 +7,6 @@
 //
 
 #import "WQMailTextField.h"
-#import <Masonry.h>
 //强引用/弱引用
 #define WQWeakSelf(type) __weak typeof(type) weak##type = type
 #define WQStrongSelf(type) __strong typeof(type) strong##type = weak##type
@@ -43,25 +42,54 @@ typedef NS_ENUM(NSUInteger,WQMailTextFieldLayout) {
  */
 - (void)configInitializeLayoutType:(WQMailTextFieldLayout)layoutType {
     self.delegate = self;
-    _email = [[NSMutableString alloc] initWithCapacity:0];
+    _email = [[ NSMutableString alloc]initWithCapacity:0];
     _mailLabel = [[UILabel alloc] init];
-    _mailLabel.textColor = [UIColor colorWithRed:170.0/255.0 green:170.0/255.0 blue:170.0/255.0 alpha:1];
-    _mailLabel.font = self.font;
-    if (layoutType == WQMailTextFieldLayoutAuto) {
+    [_mailLabel setTextColor:[UIColor colorWithRed:170.0/255.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0]];
+    [_mailLabel setFont:self.font];
+    
+    if (layoutType == WQMailTextFieldLayoutAuto)
+    {
         [self addSubview:_mailLabel];
-        WQWeakSelf(self);
-        [_mailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            WQStrongSelf(self);
-            make.left.mas_equalTo(strongself.mas_left).offset(6);
-            make.right.equalTo(self);
-            make.top.equalTo(self);
-            make.bottom.mas_equalTo(self.mas_bottom).offset(-1);
-        }];
-    }
-    else {
-        _mailLabel.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-2);
-        [self addSubview:_mailLabel];
+        _mailLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         
+        NSLayoutConstraint  * leftConstant = [NSLayoutConstraint constraintWithItem:_mailLabel
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self
+                                                                          attribute:NSLayoutAttributeLeft
+                                                                         multiplier:1
+                                                                           constant:6];
+        NSLayoutConstraint  * rightConstant = [NSLayoutConstraint constraintWithItem:_mailLabel
+                                                                           attribute:NSLayoutAttributeRight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self
+                                                                           attribute:NSLayoutAttributeRight
+                                                                          multiplier:1
+                                                                            constant:0];
+        NSLayoutConstraint  * topConstant = [NSLayoutConstraint constraintWithItem:_mailLabel
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self
+                                                                         attribute:NSLayoutAttributeTop
+                                                                        multiplier:1
+                                                                          constant:0];
+        NSLayoutConstraint  * bottomConstant = [NSLayoutConstraint constraintWithItem:_mailLabel
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1
+                                                                             constant:-1];
+        [self addConstraint:leftConstant];
+        [self addConstraint:rightConstant];
+        [self addConstraint:topConstant];
+        [self addConstraint:bottomConstant];
+        
+    } else if (layoutType == WQMailTextFieldLayoutManual)
+    {
+        _mailLabel.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - 2);
+        [self addSubview:_mailLabel];
     }
 }
 

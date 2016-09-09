@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-
+#import "WQMailTextField.h"
 @interface ViewController ()
-
+@property (weak, nonatomic) IBOutlet WQMailTextField *textField;
 
 @end
 
@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+      self.textField.mailArray = [NSMutableArray arrayWithObjects:@"@hzdracom.com",@"@qq.com",@"@163.com",@"@126.com",@"@yahoo.com",@"@139.com",@"@henu.com", nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
