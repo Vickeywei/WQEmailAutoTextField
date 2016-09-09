@@ -1,0 +1,2 @@
+# WQEmailAutoTextField
+支持StoryBoard和纯代码的邮箱输入填充效果
