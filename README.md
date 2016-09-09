@@ -8,7 +8,8 @@ pod 'WQMailAutoFillTextField', '~> 1.0.0'添加到podfile中
 1.如果使用StoryBoard,将其Class改为WQMailTextField
 然后设置邮箱后缀的数据源数组
 self.textField.mailArray = [NSMutableArray arrayWithObjects:@"@hzdracom.com",@"@qq.com",@"@163.com",@"@126.com",@"@yahoo.com",@"@139.com",@"@henu.com", nil];
-2.如果是纯代码,初始化方法只支持- (instancetype)initWithFrame:(CGRect)frame          fontSize:(CGFloat)fontSize;//第一个是frame,第二个是字号大小
+2.如果是纯代码,初始化方法只支持
+- (instancetype)initWithFrame:(CGRect)frame          fontSize:(CGFloat)fontSize;//第一个是frame,第二个是字号大小
 在设置邮箱后缀的数据源数组.
 
 
